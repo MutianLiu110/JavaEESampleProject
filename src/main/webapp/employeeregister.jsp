@@ -17,7 +17,7 @@
 <div align="center">
     <h1>Employee Register Form</h1>
     <form action="<%= request.getContextPath() %>/register" method="post">
-        <table style="with: 80%">
+        <table style="with: 60%">
             <tr>
                 <td>Username</td>
                 <td><input type="text" name="name" /></td>
@@ -26,7 +26,8 @@
                 <td>Email</td>
                 <td><input type="text" name="email" /></td>
             </tr>
-            <tr>Country</td>
+            <tr>
+                <td>Country</td>
                 <td><input type="text" name="country" /></td>
             </tr>
             <tr>

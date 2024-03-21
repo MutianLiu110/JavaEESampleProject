@@ -19,6 +19,9 @@ public class UserDAO {
             " (?, ?, ?, ?);";
 
     private static final String SELECT_USER_BY_ID = "select id,name,email,country, password from users where id =?";
+
+    private static final String SELECT_USER_BY_PASSWORD = "select from users where name = ?, password = ?;";
+
     private static final String SELECT_ALL_USERS = "select * from users";
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =?, password =? where id = ?;";
@@ -42,7 +45,7 @@ public class UserDAO {
         String INSERT_USERS_SQL = "INSERT INTO users" +
                 "  (id, name, email, country, password) VALUES " +
                 " (?, ?, ?, ?, ?);";
-        int result = 0;
+        // int result = 0;
 
         Class.forName("com.mysql.jdbc.Driver");
 
@@ -64,6 +67,31 @@ public class UserDAO {
         printSQLException(e);
 
         }
+    }
+
+    public boolean login(User user) throws ClassNotFoundException {
+        boolean status = false;
+        Class.forName("com.mysql.jdbc.Driver");
+
+        try (Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/coursework?useSSL=false", "root", "601456");
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("select * from users where name = ? and password = ? ")) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            status = rs.next();
+
+        } catch (SQLException e) {
+            // process sql exception
+            printSQLException(e);
+        }
+        return status;
+
     }
 
     public void insertUser(User user) throws SQLException {

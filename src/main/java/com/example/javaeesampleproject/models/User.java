@@ -27,6 +27,12 @@ public class User {
         this.country = country;
     }
 
+    public User(String username,  String password){
+        super();
+        this.username = username;
+        this.password = password;
+    }
+
     public User(int id, String username, String password,  String email, String country){
         super();
         this.id = id;
