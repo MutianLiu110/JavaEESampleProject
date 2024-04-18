@@ -1,13 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JSP - Hello World</title>
-</head>
-<body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="user-servlet">User Servlet</a>
-</body>
-</html>
+<!--Header-->
+<%@ include file="header.jsp" %>
+
+<!-- 页面内容 -->
+<div class="container mt-4">
+    <h2>Sample Project</h2>
+    <p>This is a Sample Project</p>
+</div>
+
+<!-- Footer -->
+<%@ include file="footer.jsp" %>

@@ -72,29 +72,35 @@ public class UserDAO {
     }
 
     public boolean login(User user) throws ClassNotFoundException {
-        boolean status = false;
+        boolean state = false;
+        String SELECT_USER_SQL = "SELECT * FROM users WHERE name = ? AND password = ?";
+
         Class.forName("com.mysql.jdbc.Driver");
 
-        try (Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/coursework?useSSL=false", "root", "601456");
-
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement("select * from users where name = ? and password = ? ")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/coursework?useSSL=false", "root", "601456");
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_SQL)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
 
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
-            status = rs.next();
+
+            if (rs.next()) {
+                System.out.println("Login successful!");
+                state =  true;
+                // Handle successful login
+            } else {
+                System.out.println("Login failed. Invalid username or password.");
+                // Handle failed login
+            }
 
         } catch (SQLException e) {
-            // process sql exception
+            // Process SQL exception
             printSQLException(e);
         }
-        return status;
-
+        return state;
     }
+
 
     public void insertUser(User user) throws SQLException {
         System.out.println(INSERT_USERS_SQL);
