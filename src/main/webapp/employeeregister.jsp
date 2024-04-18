@@ -15,8 +15,8 @@
 </head>
 <body>
 <div align="center">
-    <h1>Employee Register Form</h1>
-    <form action="<%= request.getContextPath() %>/register" method="post">
+    <h1>Register</h1>
+    <form action="<%= request.getContextPath() %>/register" method="post", enctype="multipart/form-data">
         <table style="with: 60%">
             <tr>
                 <td>Username</td>
@@ -31,9 +31,14 @@
                 <td><input type="text" name="country" /></td>
             </tr>
             <tr>
+                <td>Avatar</td>
+                <td><input type="file" name="avatar" /></td>
+            </tr>
+            <tr>
                 <td>Password</td>
                 <td><input type="password" name="password" /></td>
             </tr>
+
 
         </table>
         <input type="submit" value="Submit" />

@@ -43,8 +43,8 @@ public class UserDAO {
 
     public void register(User user) throws ClassNotFoundException{
         String INSERT_USERS_SQL = "INSERT INTO users" +
-                "  (id, name, email, country, password) VALUES " +
-                " (?, ?, ?, ?, ?);";
+                "  (id, name, email, country, password, isAdmin, avatar) VALUES " +
+                " (?, ?, ?, ?, ?, ?, ?);";
         // int result = 0;
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -57,6 +57,8 @@ public class UserDAO {
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getCountry());
             preparedStatement.setString(5, user.getPassword());
+            preparedStatement.setString(6, user.getIsAdmin());
+            preparedStatement.setString(7, user.getAvatar());
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query

@@ -8,6 +8,10 @@ public class User {
 
     protected String country;
 
+    protected String isAdmin;
+
+    protected String avatar;
+
     public User(){
 
     }
@@ -76,5 +80,13 @@ public class User {
     public void setCountry( String country ){ this.country = country;}
 
     public String getCountry(){ return country; }
+
+    public void setIsAdmin( String text ) { this.isAdmin = text; }
+
+    public String getIsAdmin () { return isAdmin; }
+
+    public void setAvatar (String base64text) { this.avatar = base64text; }
+
+    public String getAvatar () { return avatar; }
 
 }
