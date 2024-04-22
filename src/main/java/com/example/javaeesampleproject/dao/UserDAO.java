@@ -134,13 +134,45 @@ public class UserDAO {
                 String email = rs.getString("email");
                 String country = rs.getString("country");
                 String password = rs.getString("password");
-                user = new User (id, name, email, country, password);
+                String isAdmin = rs.getString("isAdmin");
+                String avatar = rs.getString("avatar");
+                user = new User (id, name, email, country, password, isAdmin, avatar);
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return user;
     }
+
+    public User getProfile(String username) {
+        User user = null;
+        // SQL 查询语句
+        String sql = "SELECT * FROM users WHERE name = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                // 从 ResultSet 中获取用户信息
+                int userId = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                String password = rs.getString("password");
+                String isAdmin = rs.getString("isAdmin");
+                String avatar = rs.getString("avatar");
+                // 创建 User 对象
+                user = new User(userId, name, email, country, password, isAdmin, avatar);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return user;
+    }
+
+    //public void userProfile(int id){
+
+    //}
 
     public List <User> selectAllUsers() {
 
@@ -185,7 +217,7 @@ public class UserDAO {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
-            statement.setInt(4, user.getId());
+            /// statement.setInt(4, user.getId());
             statement.setString(5, user.getPassword());
 
             rowUpdated = statement.executeUpdate() > 0;

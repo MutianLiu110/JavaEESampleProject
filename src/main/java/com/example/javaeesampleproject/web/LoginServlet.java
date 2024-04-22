@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
                 // 如果登录成功，设置用户 session 并重定向到 homepage.jsp
                 HttpSession session = request.getSession();
                 session.setAttribute("username", name);
+                session.setAttribute("id", user.getId());
                 response.sendRedirect("index.jsp");
             } else {
                 // 如果登录失败，设置错误消息并重定向到 employeelogin.jsp

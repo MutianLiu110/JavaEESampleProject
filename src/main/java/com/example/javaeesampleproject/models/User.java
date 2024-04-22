@@ -1,7 +1,7 @@
 package com.example.javaeesampleproject.models;
 
 public class User {
-    protected int id;
+    public int id;
     protected String username;
     protected String password;
     protected String email;
@@ -37,6 +37,11 @@ public class User {
         this.password = password;
     }
 
+    public User(String username){
+        super();
+        this.username = username;
+    }
+
     public User(int id, String username, String password,  String email, String country){
         super();
         this.id = id;
@@ -46,8 +51,14 @@ public class User {
         this.country = country;
     }
 
-    public void setId( int id ){
+    public User(int id, String username, String email, String country, String password, String isAdmin, String avatar) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.country = country;
+        this.avatar = avatar;
+        this.isAdmin = isAdmin;
     }
 
     public int getId(){
