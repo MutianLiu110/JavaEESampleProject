@@ -8,33 +8,40 @@
 <%@ include file="header.jsp" %>
 
 <%@ page import="com.example.javaeesampleproject.dao.UserDAO" %>
-<%@ page import="com.example.javaeesampleproject.models.User" %>
+<%@ page import="com.example.javaeesampleproject.web.ProfileServlet" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
+<%
+    String name = (String) session.getAttribute("username");
+%>
 
-    <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-    url = "jdbc:mysql://localhost:3306/coursework?useSSL=false"
-    user = "root"  password = "601456"/>
+<h1>Profile</h1>
+<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+                   url = "jdbc:mysql://localhost:3306/coursework?useSSL=false"
+                   user = "root"  password = "601456"/>
 
-    <sql:query dataSource = "${snapshot}" var = "result">
-    SELECT * from users;
-    </sql:query>
+<sql:query dataSource = "${snapshot}" var = "result">
+    SELECT * from users WHERE name = ?;
+    <sql:param value="${sessionScope.username}"/>
+</sql:query>
 
-    <table border = "1" width = "100%">
+
+
+<table border = "1" width = "100%">
     <tr>
-    <th>Emp ID</th>
-    <th>Name</th>
-    <th>Mail</th>
-    <th>Identity</th>
+        <th>Emp ID</th>
+        <th>Name</th>
+        <th>Mail</th>
+        <th>Identity</th>
     </tr>
 
     <c:forEach var = "row" items = "${result.rows}">
-    <tr>
-    <td><c:out value = "${row.id}"/></td>
-    <td><c:out value = "${row.name}"/></td>
-    <td><c:out value = "${row.email}"/></td>
-    <td><c:out value = "${row.isAdmin}"/></td>
-    </tr>
+        <tr>
+            <td><c:out value = "${row.id}"/></td>
+            <td><c:out value = "${row.name}"/></td>
+            <td><c:out value = "${row.email}"/></td>
+            <td><c:out value = "${row.isAdmin}"/></td>
+        </tr>
     </c:forEach>
-    </table>
+</table>
 <%@ include file="footer.jsp" %>
