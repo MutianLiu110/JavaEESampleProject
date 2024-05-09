@@ -71,9 +71,9 @@ public class UserDAO {
         }
     }
 
-    public boolean login(User user) throws ClassNotFoundException {
-        boolean state = false;
-        String SELECT_USER_SQL = "SELECT * FROM users WHERE name = ? AND password = ?";
+    public User login(User user) throws ClassNotFoundException, SQLException {
+        User loggedInUser = null;
+        String SELECT_USER_SQL = "SELECT id, name FROM users WHERE name = ? AND password = ?";
 
         Class.forName("com.mysql.jdbc.Driver");
 
@@ -82,24 +82,21 @@ public class UserDAO {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
 
-            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                System.out.println("Login successful!");
-                state =  true;
-                // Handle successful login
+                loggedInUser = new User();
+                loggedInUser.setId(rs.getInt("id"));
+                loggedInUser.setUsername(rs.getString("name"));
+                System.out.println("Login successful! User ID: " + loggedInUser.getId());
             } else {
                 System.out.println("Login failed. Invalid username or password.");
-                // Handle failed login
             }
 
-        } catch (SQLException e) {
-            // Process SQL exception
-            printSQLException(e);
         }
-        return state;
+        return loggedInUser;
     }
+
 
 
     public void insertUser(User user) throws SQLException {
@@ -144,13 +141,13 @@ public class UserDAO {
         return user;
     }
 
-    public User getProfile(String username) {
+    public User getProfile(int uid) {
         User user = null;
         // SQL 查询语句
-        String sql = "SELECT * FROM users WHERE name = ?";
+        String sql = "SELECT * FROM users WHERE id = ?";
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
+            preparedStatement.setInt(1, uid);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 // 从 ResultSet 中获取用户信息

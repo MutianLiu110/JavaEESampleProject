@@ -24,9 +24,10 @@ public class ProfileServlet extends HttpServlet {
         // Get user id from session or request parameter, assuming userId is stored in session for demonstration
         // For example, assuming userId is stored in session attribute "current_id"
         String username = (String) request.getSession().getAttribute("name");
+        Integer id = (Integer) request.getSession().getAttribute("id");
 
         // Fetch user details from the database
-        User user = userDAO.getProfile(username);
+        User user = userDAO.getProfile(id);
 
         if (user != null) {
             // If user exists, forward to profile page

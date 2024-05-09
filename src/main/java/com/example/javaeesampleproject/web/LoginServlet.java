@@ -34,13 +34,13 @@ public class LoginServlet extends HttpServlet {
 
         try {
             // 使用 DAO 层的 login 方法来验证用户登录
-            boolean loginStatus = userDAO.login(user);
+            User loggedInUser = userDAO.login(user);
 
-            if (loginStatus) {
+            if (loggedInUser != null) {
                 // 如果登录成功，设置用户 session 并重定向到 homepage.jsp
                 HttpSession session = request.getSession();
-                session.setAttribute("username", name);
-                session.setAttribute("id", user.getId());
+                session.setAttribute("username", loggedInUser.getUsername());
+                session.setAttribute("id", loggedInUser.getId());
                 response.sendRedirect("index.jsp");
             } else {
                 // 如果登录失败，设置错误消息并重定向到 employeelogin.jsp

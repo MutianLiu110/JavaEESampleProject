@@ -44,7 +44,7 @@
                         <a class="nav-link" href="profile.jsp">${sessionScope.username}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
                     </li>
                 </c:otherwise>
             </c:choose>

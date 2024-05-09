@@ -8,13 +8,16 @@
     <p>This is a Sample Project</p>
     <%
         String username = (String) session.getAttribute("username");
+        Integer userId = (Integer) session.getAttribute("id");
         //int id = Integer.parseInt(session.getAttribute("id").toString());
         User user = new User(username);
 
     %>
 
-    <p>Welcome, <%= username %>!</p>
+    <img src="image/microsoft.png" alt="img">
 
+    <p>Welcome, <%= username %>!</p>
+    <p>Welcome, <%= userId %>!</p>
 
 
 </div>

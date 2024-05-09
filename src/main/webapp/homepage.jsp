@@ -8,4 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
 <a>Hello Hello</a>
+<img src="image/microsoft.png" alt="img">
 <%@ include file="footer.jsp" %>

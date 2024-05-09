@@ -61,6 +61,8 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+
+    public void setId(int id) { this.id = id;}
     public int getId(){
         return id;
     }
