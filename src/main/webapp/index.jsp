@@ -1,25 +1,44 @@
 <%@ page import="com.example.javaeesampleproject.models.User" %>
+<%@ page import="com.example.javaeesampleproject.dao.UserDAO" %>
 <!--Header-->
 <%@ include file="header.jsp" %>
 
 <!-- 页面内容 -->
 <div class="container mt-4">
-    <h2>Sample Project</h2>
-    <p>This is a Sample Project</p>
-    <%
-        String username = (String) session.getAttribute("username");
-        Integer userId = (Integer) session.getAttribute("id");
-        //int id = Integer.parseInt(session.getAttribute("id").toString());
-        User user = new User(username);
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-md-3">
+            <div class="accordion" id="sidebarAccordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Sidebar
+                            </button>
+                        </h5>
+                    </div>
 
-    %>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#sidebarAccordion">
+                        <div class="card-body">
+                            <!-- 在这里添加侧边栏的内容 -->
+                            <ul class="list-group">
+                                <li class="list-group-item">Item 1</li>
+                                <li class="list-group-item">Item 2</li>
+                                <li class="list-group-item">Item 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <img src="image/microsoft.png" alt="img">
-
-    <p>Welcome, <%= username %>!</p>
-    <p>Welcome, <%= userId %>!</p>
-
-
+        <!-- 主要内容区域 -->
+        <div class="col-md-9">
+            <h2>Hotel Booking</h2>
+            <p>Book your room</p>
+            <%-- 在这里添加主要内容 --%>
+        </div>
+    </div>
 </div>
 
 <!-- Footer -->

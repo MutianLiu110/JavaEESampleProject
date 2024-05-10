@@ -20,6 +20,13 @@
                             <input type="text" class="form-control" id="country" name="country" placeholder="Enter your country">
                         </div>
                         <div class="form-group">
+                            <label for="country">Country:</label>
+                            <select class="form-control" id="isAdmin" name="isAdmin">
+                                <option value="Yes">Admin</option>
+                                <option value="No">User</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="avatar">Avatar:</label>
                             <input type="file" class="form-control-file" id="avatar" name="avatar">
                         </div>

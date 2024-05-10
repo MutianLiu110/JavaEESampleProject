@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
         user.setUsername(name);
         user.setPassword(password);
 
+
         try {
             // 使用 DAO 层的 login 方法来验证用户登录
             User loggedInUser = userDAO.login(user);
@@ -41,6 +42,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", loggedInUser.getUsername());
                 session.setAttribute("id", loggedInUser.getId());
+                session.setAttribute("identity", loggedInUser.getIdentity());
                 response.sendRedirect("index.jsp");
             } else {
                 // 如果登录失败，设置错误消息并重定向到 employeelogin.jsp

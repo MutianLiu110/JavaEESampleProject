@@ -8,7 +8,7 @@ public class User {
 
     protected String country;
 
-    protected String isAdmin;
+    protected String identity;
 
     protected String avatar;
 
@@ -51,14 +51,15 @@ public class User {
         this.country = country;
     }
 
-    public User(int id, String username, String email, String country, String password, String isAdmin, String avatar) {
+    public User(int id, String username, String email, String country, String password, String identity, String avatar) {
+        super();
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.country = country;
         this.avatar = avatar;
-        this.isAdmin = isAdmin;
+        this.identity = identity;
     }
 
 
@@ -94,9 +95,9 @@ public class User {
 
     public String getCountry(){ return country; }
 
-    public void setIsAdmin( String text ) { this.isAdmin = text; }
+    public void setIdentity( String text ) { this.identity = text; }
 
-    public String getIsAdmin () { return isAdmin; }
+    public String getIdentity () { return identity; }
 
     public void setAvatar (String base64text) { this.avatar = base64text; }
 

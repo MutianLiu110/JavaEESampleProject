@@ -43,7 +43,7 @@ public class UserDAO {
 
     public void register(User user) throws ClassNotFoundException{
         String INSERT_USERS_SQL = "INSERT INTO users" +
-                "  (id, name, email, country, password, isAdmin, avatar) VALUES " +
+                "  (id, name, email, country, password, identity, avatar) VALUES " +
                 " (?, ?, ?, ?, ?, ?, ?);";
         // int result = 0;
 
@@ -57,7 +57,7 @@ public class UserDAO {
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getCountry());
             preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setString(6, user.getIsAdmin());
+            preparedStatement.setString(6, user.getIdentity());
             preparedStatement.setString(7, user.getAvatar());
 
             System.out.println(preparedStatement);
@@ -73,7 +73,7 @@ public class UserDAO {
 
     public User login(User user) throws ClassNotFoundException, SQLException {
         User loggedInUser = null;
-        String SELECT_USER_SQL = "SELECT id, name FROM users WHERE name = ? AND password = ?";
+        String SELECT_USER_SQL = "SELECT id, name, identity FROM users WHERE name = ? AND password = ?";
 
         Class.forName("com.mysql.jdbc.Driver");
 
@@ -88,7 +88,10 @@ public class UserDAO {
                 loggedInUser = new User();
                 loggedInUser.setId(rs.getInt("id"));
                 loggedInUser.setUsername(rs.getString("name"));
-                System.out.println("Login successful! User ID: " + loggedInUser.getId());
+                loggedInUser.setIdentity(rs.getString("identity")); // 假设您有一个相应的setter方法
+
+                System.out.println("Login successful! User ID: " + loggedInUser.getId() + loggedInUser.getIdentity());
+
             } else {
                 System.out.println("Login failed. Invalid username or password.");
             }
@@ -131,7 +134,7 @@ public class UserDAO {
                 String email = rs.getString("email");
                 String country = rs.getString("country");
                 String password = rs.getString("password");
-                String isAdmin = rs.getString("isAdmin");
+                String isAdmin = rs.getString("identity");
                 String avatar = rs.getString("avatar");
                 user = new User (id, name, email, country, password, isAdmin, avatar);
             }
@@ -156,7 +159,7 @@ public class UserDAO {
                 String email = rs.getString("email");
                 String country = rs.getString("country");
                 String password = rs.getString("password");
-                String isAdmin = rs.getString("isAdmin");
+                String isAdmin = rs.getString("identity");
                 String avatar = rs.getString("avatar");
                 // 创建 User 对象
                 user = new User(userId, name, email, country, password, isAdmin, avatar);

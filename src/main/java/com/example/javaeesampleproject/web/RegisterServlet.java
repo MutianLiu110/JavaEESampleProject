@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String country = request.getParameter("country");
         String password = request.getParameter("password");
-        String isAdmin = "No";
+        String isAdmin = request.getParameter("isAdmin");
         Part avatar = request.getPart("avatar");
         InputStream inputStream = avatar.getInputStream();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -49,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setCountry(country);
         user.setPassword(password);
-        user.setIsAdmin(isAdmin);
+        user.setIdentity(isAdmin);
         user.setAvatar(base64Image);
 
 
