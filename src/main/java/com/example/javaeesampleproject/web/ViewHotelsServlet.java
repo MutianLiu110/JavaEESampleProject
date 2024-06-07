@@ -30,5 +30,20 @@ public class ViewHotelsServlet extends HttpServlet {
         request.setAttribute("hotels", hotels);
         request.getRequestDispatcher("hotels.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyword = request.getParameter("keyword");
+        List<Hotel> hotels;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            hotels = hotelDAO.searchHotels(keyword);
+        } else {
+            hotels = hotelDAO.view();
+        }
+
+        request.setAttribute("hotels", hotels);
+        request.getRequestDispatcher("hotels.jsp").forward(request, response);
+    }
 }
 

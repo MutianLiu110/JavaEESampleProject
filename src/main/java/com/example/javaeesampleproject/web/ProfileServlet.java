@@ -39,7 +39,7 @@ public class ProfileServlet extends HttpServlet {
             request.getRequestDispatcher("profile.jsp").forward(request, response);
         } else {
             // If user does not exist, handle appropriately (e.g., redirect to error page)
-            response.sendRedirect("homepage.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 }

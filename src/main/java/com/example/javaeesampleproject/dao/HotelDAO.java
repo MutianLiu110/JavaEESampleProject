@@ -54,6 +54,30 @@ public class HotelDAO {
         }
     }
 
+    public List<Hotel> searchHotels(String keyword) {
+        List<Hotel> hotels = new ArrayList<>();
+        String SEARCH_HOTELS_SQL = "SELECT * FROM hotel WHERE name LIKE ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_HOTELS_SQL)) {
+            preparedStatement.setString(1, "%" + keyword + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Hotel hotel = new Hotel();
+                hotel.setId(resultSet.getInt("id"));
+                hotel.setName(resultSet.getString("name"));
+                hotel.setDescription(resultSet.getString("description"));
+                hotel.setCity(resultSet.getString("city"));
+                hotels.add(hotel);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return hotels;
+    }
+
     public void insert(Hotel hotel, List<String> base64Images) throws ClassNotFoundException {
         String INSERT_HOTEL_SQL = "INSERT INTO hotel (name, description, city) VALUES (?, ?, ?);";
         String INSERT_PICTURE_SQL = "INSERT INTO picture (pic) VALUES (?);";

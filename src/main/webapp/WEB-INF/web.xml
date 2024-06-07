@@ -4,6 +4,16 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<servlet>
+		<servlet-name>SearchHotelsServlet</servlet-name>
+		<servlet-class>com.example.javaeesampleproject.web.ViewHotelsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SearchHotelsServlet</servlet-name>
+		<url-pattern>/searchHotels</url-pattern>
+	</servlet-mapping>
 	<jsp-config>
 		<taglib>
 			<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
